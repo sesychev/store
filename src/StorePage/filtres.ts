@@ -274,7 +274,7 @@ document.querySelector(".min-range-price")?.addEventListener("input", (event) =>
   Array.from(cards).forEach((card) => {
     const dataPrice = card.getAttribute("data-price") as string;
 
-    if (Number(target.value) >= Number(dataPrice)) {
+    if (Number(target.value) > Number(dataPrice)) {
       card.style.display = "none";
     } else {
       card.style.display = "flex";
@@ -293,7 +293,7 @@ document.querySelector(".max-range-price")?.addEventListener("input", (event) =>
   Array.from(cards).forEach((card) => {
     const dataPrice = card.getAttribute("data-price") as string;
 
-    if (Number(target.value) <= Number(dataPrice)) {
+    if (Number(target.value) < Number(dataPrice)) {
       card.style.display = "none";
     } else {
       card.style.display = "flex";
@@ -312,7 +312,7 @@ document.querySelector(".min-range-stock")?.addEventListener("input", (event) =>
   Array.from(cards).forEach((card) => {
     const dataStock = card.getAttribute("data-stock") as string;
 
-    if (Number(target.value) >= Number(dataStock)) {
+    if (Number(target.value) > Number(dataStock)) {
       card.style.display = "none";
     } else {
       card.style.display = "flex";
@@ -331,7 +331,7 @@ document.querySelector(".max-range-stock")?.addEventListener("input", (event) =>
   Array.from(cards).forEach((card) => {
     const dataStock = card.getAttribute("data-stock") as string;
 
-    if (Number(target.value) <= Number(dataStock)) {
+    if (Number(target.value) < Number(dataStock)) {
       card.style.display = "none";
     } else {
       card.style.display = "flex";
