@@ -261,11 +261,11 @@ document.querySelector(".min-range-price")?.addEventListener("input", (event) =>
   const cards = document.querySelectorAll<HTMLElement>(".card-product");
   const target = event.target as HTMLInputElement;
   console.log(target.value);
+
   Array.from(cards).forEach((card) => {
     const dataPrice = card.getAttribute("data-price") as string;
-    const dataRating = card.getAttribute("data-rating") as string;
 
-    if (Number(target.value) > Number(dataPrice)) {
+    if (Number(target.value) >= Number(dataPrice)) {
       card.style.display = "none";
     } else {
       card.style.display = "flex";
@@ -277,11 +277,12 @@ document.querySelector(".max-range-price")?.addEventListener("input", (event) =>
   const cards = document.querySelectorAll<HTMLElement>(".card-product");
   const target = event.target as HTMLInputElement;
   const max = document.querySelector<Element>(".max-price");
+  console.log(target.value);
   //max?.textContent = `$${target.value as string}`;
   Array.from(cards).forEach((card) => {
     const dataPrice = card.getAttribute("data-price") as string;
 
-    if (Number(target.value) < Number(dataPrice)) {
+    if (Number(target.value) <= Number(dataPrice)) {
       card.style.display = "none";
     } else {
       card.style.display = "flex";
@@ -293,10 +294,11 @@ document.querySelector(".min-range-stock")?.addEventListener("input", (event) =>
   const cards = document.querySelectorAll<HTMLElement>(".card-product");
   const target = event.target as HTMLInputElement;
   console.log(target.value);
+
   Array.from(cards).forEach((card) => {
     const dataStock = card.getAttribute("data-stock") as string;
 
-    if (Number(target.value) > Number(dataStock)) {
+    if (Number(target.value) >= Number(dataStock)) {
       card.style.display = "none";
     } else {
       card.style.display = "flex";
@@ -308,10 +310,11 @@ document.querySelector(".max-range-stock")?.addEventListener("input", (event) =>
   const cards = document.querySelectorAll<HTMLElement>(".card-product");
   const target = event.target as HTMLInputElement;
   console.log(target.value);
+
   Array.from(cards).forEach((card) => {
     const dataStock = card.getAttribute("data-stock") as string;
 
-    if (Number(target.value) < Number(dataStock)) {
+    if (Number(target.value) <= Number(dataStock)) {
       card.style.display = "none";
     } else {
       card.style.display = "flex";
