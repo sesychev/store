@@ -1,5 +1,6 @@
 import { priceMin, priceMax, stockMin, stockMax, sortedCategorySet, sortedBrandSet } from "../assets/scripts/findData";
 
+export let found = 100;
 const fragmentStorePage = document.createDocumentFragment();
 export const divStorePage = document.createElement("div");
 divStorePage.classList.add("store-page");
@@ -223,6 +224,10 @@ Array.from(checkboxes).forEach((checkbox) => checkbox.addEventListener("change",
 
   console.log("filter1:", filter1);
   console.log("filter2:", filter2);
+
+  const foundProduct = document.querySelector(".found-product");
+  found = Array.from(cards).filter(card => card.style.display === "flex").length;
+  if (foundProduct != undefined) foundProduct.textContent = `Found: ${found} pcs`;
 }))
 
 buttonReset.addEventListener("click", () => {
@@ -235,12 +240,15 @@ buttonReset.addEventListener("click", () => {
   });
   filter1 = new Set<string>();
   filter2 = new Set<string>();
+  //document.querySelector(".min-range-price")?.setAttribute("value", `${priceMin}`);
+  //console.log(document.querySelector(".min-range-price"))
 });
 
 document.querySelector(".input-search")?.addEventListener("input", (event) => {
   //const cards: HTMLCollectionOf<Element> = document.getElementsByClassName("card-product");
   const cards = document.querySelectorAll<HTMLElement>(".card-product");
   const target = event.target as HTMLInputElement;
+
   Array.from(cards).forEach((card) => {
     const dataPrice = card.getAttribute("data-price") as string;
     const dataRating = card.getAttribute("data-rating") as string;
@@ -258,9 +266,10 @@ document.querySelector(".input-search")?.addEventListener("input", (event) => {
 })
 
 document.querySelector(".min-range-price")?.addEventListener("input", (event) => {
-  const cards = document.querySelectorAll<HTMLElement>(".card-product");
+  const cards = document.getElementsByClassName("card-product") as HTMLCollectionOf<HTMLElement>;
   const target = event.target as HTMLInputElement;
-  console.log(target.value);
+  const min = document.querySelector<Element>(".min-price");
+  if (min != undefined) min.textContent = `$${target.value}`;
 
   Array.from(cards).forEach((card) => {
     const dataPrice = card.getAttribute("data-price") as string;
@@ -271,14 +280,16 @@ document.querySelector(".min-range-price")?.addEventListener("input", (event) =>
       card.style.display = "flex";
     }
   })
+
+  count(cards);
 })
 
 document.querySelector(".max-range-price")?.addEventListener("input", (event) => {
-  const cards = document.querySelectorAll<HTMLElement>(".card-product");
+  const cards = document.getElementsByClassName("card-product") as HTMLCollectionOf<HTMLElement>;
   const target = event.target as HTMLInputElement;
   const max = document.querySelector<Element>(".max-price");
-  console.log(target.value);
-  //max?.textContent = `$${target.value as string}`;
+  if (max != undefined) max.textContent = `$${target.value}`;
+
   Array.from(cards).forEach((card) => {
     const dataPrice = card.getAttribute("data-price") as string;
 
@@ -288,12 +299,15 @@ document.querySelector(".max-range-price")?.addEventListener("input", (event) =>
       card.style.display = "flex";
     }
   })
+
+  count(cards);
 })
 
 document.querySelector(".min-range-stock")?.addEventListener("input", (event) => {
-  const cards = document.querySelectorAll<HTMLElement>(".card-product");
+  const cards = document.getElementsByClassName("card-product") as HTMLCollectionOf<HTMLElement>;
   const target = event.target as HTMLInputElement;
-  console.log(target.value);
+  const min = document.querySelector<Element>(".min-stock");
+  if (min != undefined) min.textContent = `${target.value}`;
 
   Array.from(cards).forEach((card) => {
     const dataStock = card.getAttribute("data-stock") as string;
@@ -304,12 +318,15 @@ document.querySelector(".min-range-stock")?.addEventListener("input", (event) =>
       card.style.display = "flex";
     }
   })
+
+  count(cards);
 })
 
 document.querySelector(".max-range-stock")?.addEventListener("input", (event) => {
-  const cards = document.querySelectorAll<HTMLElement>(".card-product");
+  const cards = document.getElementsByClassName("card-product") as HTMLCollectionOf<HTMLElement>;
   const target = event.target as HTMLInputElement;
-  console.log(target.value);
+  const max = document.querySelector<Element>(".max-stock");
+  if (max != undefined) max.textContent = `${target.value}`;
 
   Array.from(cards).forEach((card) => {
     const dataStock = card.getAttribute("data-stock") as string;
@@ -320,4 +337,12 @@ document.querySelector(".max-range-stock")?.addEventListener("input", (event) =>
       card.style.display = "flex";
     }
   })
+
+  count(cards);
 })
+
+export function count(cards: HTMLCollectionOf<HTMLElement>) {
+  const foundProduct = document.querySelector(".found-product");
+  found = Array.from(cards).filter(card => card.style.display === "flex").length;
+  if (foundProduct != undefined) foundProduct.textContent = `Found: ${found} pcs`;
+}

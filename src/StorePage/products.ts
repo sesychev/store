@@ -1,6 +1,6 @@
 import { emptyCart, divCartPage, cartWrapper, showInCart } from "../CartPage/cartPage";
 import { addToCartButton, divDescriptiontPage } from "../descriptionPage/productDescription";
-import { divStorePage } from "./filtres";
+import { divStorePage, found } from "./filtres";
 import { products } from "../assets/data/productsData";
 import { Products } from "../assets/scripts/findData";
 
@@ -267,7 +267,7 @@ export function getCartCounterDescription(n: number) {
   }
 }
 // getCartCounterDescription();
-
-foundProduct.textContent = `Found: ${Array.from(document.getElementsByClassName("card-product")).length} pcs`;
+const f = document.querySelector(".found-product");
+if (f != undefined) f.textContent = `Found: ${found} pcs`;
 
 export { setProductsCard, getCartCounter, totalCounter };
