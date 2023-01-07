@@ -100,6 +100,7 @@ function setProductsCard(items: Array<Products>) {
     cardProduct.dataset.id = product.id.toString();
     cardProduct.dataset.price = product.price.toString();
     cardProduct.dataset.rating = product.rating.toString();
+    cardProduct.dataset.stock = product.stock.toString();
     cardProduct.dataset.brand = product.brand.toUpperCase();
     cardProduct.dataset.category = product.category.toUpperCase();
     cardsProducts.appendChild(cardProduct);

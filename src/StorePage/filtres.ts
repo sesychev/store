@@ -241,7 +241,6 @@ document.querySelector(".input-search")?.addEventListener("input", (event) => {
   //const cards: HTMLCollectionOf<Element> = document.getElementsByClassName("card-product");
   const cards = document.querySelectorAll<HTMLElement>(".card-product");
   const target = event.target as HTMLInputElement;
-
   Array.from(cards).forEach((card) => {
     const dataPrice = card.getAttribute("data-price") as string;
     const dataRating = card.getAttribute("data-rating") as string;
@@ -250,10 +249,72 @@ document.querySelector(".input-search")?.addEventListener("input", (event) => {
 
     if (!(dataPrice.includes(target.value) || dataRating.includes(target.value) || dataCategory.includes(target.value.toLocaleUpperCase()) || dataBrand.includes(target.value.toLocaleUpperCase()))) {
       //card.classList.add("hide");
-      card.style.display = "none"
+      card.style.display = "none";
     } else {
-      card.style.display = "flex"
+      card.style.display = "flex";
       //card.classList.remove("hide");
+    }
+  })
+})
+
+document.querySelector(".min-range-price")?.addEventListener("input", (event) => {
+  const cards = document.querySelectorAll<HTMLElement>(".card-product");
+  const target = event.target as HTMLInputElement;
+  console.log(target.value);
+  Array.from(cards).forEach((card) => {
+    const dataPrice = card.getAttribute("data-price") as string;
+    const dataRating = card.getAttribute("data-rating") as string;
+
+    if (Number(target.value) > Number(dataPrice)) {
+      card.style.display = "none";
+    } else {
+      card.style.display = "flex";
+    }
+  })
+})
+
+document.querySelector(".max-range-price")?.addEventListener("input", (event) => {
+  const cards = document.querySelectorAll<HTMLElement>(".card-product");
+  const target = event.target as HTMLInputElement;
+  const max = document.querySelector<Element>(".max-price");
+  //max?.textContent = `$${target.value as string}`;
+  Array.from(cards).forEach((card) => {
+    const dataPrice = card.getAttribute("data-price") as string;
+
+    if (Number(target.value) < Number(dataPrice)) {
+      card.style.display = "none";
+    } else {
+      card.style.display = "flex";
+    }
+  })
+})
+
+document.querySelector(".min-range-stock")?.addEventListener("input", (event) => {
+  const cards = document.querySelectorAll<HTMLElement>(".card-product");
+  const target = event.target as HTMLInputElement;
+  console.log(target.value);
+  Array.from(cards).forEach((card) => {
+    const dataStock = card.getAttribute("data-stock") as string;
+
+    if (Number(target.value) > Number(dataStock)) {
+      card.style.display = "none";
+    } else {
+      card.style.display = "flex";
+    }
+  })
+})
+
+document.querySelector(".max-range-stock")?.addEventListener("input", (event) => {
+  const cards = document.querySelectorAll<HTMLElement>(".card-product");
+  const target = event.target as HTMLInputElement;
+  console.log(target.value);
+  Array.from(cards).forEach((card) => {
+    const dataStock = card.getAttribute("data-stock") as string;
+
+    if (Number(target.value) < Number(dataStock)) {
+      card.style.display = "none";
+    } else {
+      card.style.display = "flex";
     }
   })
 })
