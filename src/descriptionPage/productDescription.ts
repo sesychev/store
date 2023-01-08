@@ -6,6 +6,7 @@ import { getCartCounter, getCartCounterDescription } from "../StorePage/products
 const buttunToCart = document.getElementsByClassName("button-to-cart");
 
 const fragmentDescriptiontPage = document.createDocumentFragment();
+
 export const divDescriptiontPage = document.createElement("div");
 divDescriptiontPage.classList.add("description-page");
 fragmentDescriptiontPage.appendChild(divDescriptiontPage);

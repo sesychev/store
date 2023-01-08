@@ -219,6 +219,7 @@ let total = totalCounter;
 
 function getCartCounter() {
   const buttunToCart = document.getElementsByClassName("button-to-cart");
+
   Array.from(buttunToCart).forEach((button, i) => button.addEventListener("click", () => {
     emptyCart.style.display = "none";
     divCartPage.appendChild(cartWrapper);
@@ -245,8 +246,6 @@ function getCartCounter() {
 getCartCounter();
 
 function getCartCounterDescription(n: number) {
-  const buttunToCart = document.getElementsByClassName("button-to-cart");
-
   if (document.querySelector("main")?.appendChild(divDescriptiontPage)) {
     addToCartButton.addEventListener("click", () => {
       addToCartButton.classList.toggle("button-to-cart-active");
@@ -263,6 +262,7 @@ function getCartCounterDescription(n: number) {
 
       cartCounter.textContent = `${counter}`;
       headerTotal.textContent = `Grand total: $ ${total}`;
+      //const buttunToCart = document.getElementsByClassName("button-to-cart");
       //buttunToCart[n].textContent = addToCartButton.textContent;
       //buttunToCart[n].classList.toggle("button-to-cart-active");
       //return addToCartButton;

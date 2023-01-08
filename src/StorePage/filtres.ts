@@ -2,7 +2,8 @@ import { priceMin, priceMax, stockMin, stockMax, sortedCategorySet, sortedBrandS
 
 export let found = 100;
 const fragmentStorePage = document.createDocumentFragment();
-export const divStorePage = document.createElement("div");
+
+const divStorePage = document.createElement("div");
 divStorePage.classList.add("store-page");
 fragmentStorePage.appendChild(divStorePage);
 
@@ -216,10 +217,6 @@ Array.from(checkboxes).forEach((checkbox) => checkbox.addEventListener("change",
       card.classList.remove("hide");
       card.style.display = "flex";
     }
-
-    //const a: Element | null = document.querySelector(".found-product");
-    //a?.textContent:= `Found: ${Array.from(document.getElementsByClassName("card-product")).length} pcs`;
-
   });
 
   console.log("filter1:", filter1);
@@ -346,3 +343,5 @@ export function count(cards: HTMLCollectionOf<HTMLElement>) {
   found = Array.from(cards).filter(card => card.style.display === "flex").length;
   if (foundProduct != undefined) foundProduct.textContent = `Found: ${found} pcs`;
 }
+
+export { divStorePage };
