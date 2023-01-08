@@ -244,30 +244,34 @@ function getCartCounter() {
 
 getCartCounter();
 
-export function getCartCounterDescription(n: number) {
+function getCartCounterDescription(n: number) {
   const buttunToCart = document.getElementsByClassName("button-to-cart");
+
   if (document.querySelector("main")?.appendChild(divDescriptiontPage)) {
     addToCartButton.addEventListener("click", () => {
       addToCartButton.classList.toggle("button-to-cart-active");
-      if (addToCartButton.textContent === "in cart") {
-        addToCartButton.textContent = "add to cart";
-        counter--;
-        total -= - Number(products[n].price);
-      } else {
-        addToCartButton.textContent = "in cart";
+
+      if (addToCartButton.textContent === "Add to cart") {
+        addToCartButton.textContent = "In cart";
         counter++;
         total += Number(products[n].price);
+      } else {
+        addToCartButton.textContent = "Add to cart";
+        counter--;
+        total -= Number(products[n].price);
       }
-      buttunToCart[n].textContent = addToCartButton.textContent;
-      buttunToCart[n].classList.toggle("button-to-cart-active");
+
       cartCounter.textContent = `${counter}`;
       headerTotal.textContent = `Grand total: $ ${total}`;
-      return addToCartButton;
+      //buttunToCart[n].textContent = addToCartButton.textContent;
+      //buttunToCart[n].classList.toggle("button-to-cart-active");
+      //return addToCartButton;
     });
   }
 }
+
 // getCartCounterDescription();
 const f = document.querySelector(".found-product");
 if (f != undefined) f.textContent = `Found: ${found} pcs`;
 
-export { setProductsCard, getCartCounter, totalCounter };
+export { setProductsCard, getCartCounter, getCartCounterDescription, totalCounter };

@@ -1,7 +1,7 @@
 import "./description.css";
 import { products } from "../assets/data/productsData";
 import { divStorePage } from "../StorePage/filtres";
-import { getCartCounterDescription } from "../StorePage/products";
+import { getCartCounter, getCartCounterDescription } from "../StorePage/products";
 
 const buttunToCart = document.getElementsByClassName("button-to-cart");
 
@@ -120,5 +120,9 @@ function getProductInfo() {
 }
 
 getProductInfo();
+
+document.querySelector(".button-to-cart.add-to-cart__button")?.addEventListener("click", (event) => {
+  console.log(event.target);
+})
 
 // document.querySelector("main")?.appendChild(fragmentDescriptiontPage);
