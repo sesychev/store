@@ -27,21 +27,12 @@ document.querySelector(".shoping-cart")?.addEventListener("click", () => {
       })
     })
     //
-  }
-  //
-  if (arr.length === 0 && document.querySelector("main")?.firstChild === mainPage) {
-    document.querySelector("main")?.removeChild(mainPage);
-    document.querySelector("main")?.appendChild(busketPage);
-  }
-  //
-  if (arr.length > 0 && document.querySelector("main")?.firstChild === divDescriptiontPage) {
+  } else if (arr.length > 0 && document.querySelector("main")?.firstChild === divDescriptiontPage) {
     document.querySelector("main")?.removeChild(divDescriptiontPage);
     document.querySelector("main")?.appendChild(cartWrapper);
     arr.forEach((item, index) => showInCart(item - 1, index));
-  }
-  //
-  if (arr.length === 0 && document.querySelector("main")?.firstChild === divDescriptiontPage) {
-    document.querySelector("main")?.removeChild(divDescriptiontPage);
+  } else {
+    document.querySelector("main")?.firstElementChild?.remove();
     document.querySelector("main")?.appendChild(busketPage);
   }
 });
