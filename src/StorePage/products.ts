@@ -97,7 +97,6 @@ function setProductsCard(items: Array<Products>) {
   for (const product of items) {
     const cardProduct = document.createElement("div");
     cardProduct.classList.add("card-product");
-    cardProduct.dataset.id = product.id.toString();
     cardProduct.dataset.price = product.price.toString();
     cardProduct.dataset.rating = product.rating.toString();
     cardProduct.dataset.stock = product.stock.toString();
@@ -131,6 +130,7 @@ function setProductsCard(items: Array<Products>) {
 
     const priceProduct = document.createElement("p");
     priceProduct.classList.add("product__price");
+    priceProduct.dataset.id = product.id.toString();
     priceProduct.dataset.price = product.price.toString();
     priceProduct.textContent = `Price: $${product.price}`;
     wrapPriceButton.append(priceProduct);
@@ -216,26 +216,31 @@ const headerTotal = document.querySelector(".header__p") as HTMLElement;
 let counter = 0;
 const totalCounter = 0;
 let total = totalCounter;
+const arr: Array<number> = [];
 
 function getCartCounter() {
   const buttunToCart = document.getElementsByClassName("button-to-cart");
 
   Array.from(buttunToCart).forEach((button, i) => button.addEventListener("click", () => {
-    emptyCart.style.display = "none";
-    divCartPage.appendChild(cartWrapper);
-    button.classList.toggle("button-to-cart-active");
-    showInCart(i);
-
+    /*
+        emptyCart.style.display = "none";
+        divCartPage.appendChild(cartWrapper);
+        button.classList.toggle("button-to-cart-active");
+        showInCart(i);
+    */
     const prices = document.getElementsByClassName("product__price");
 
     if (button.textContent === "Add to cart") {
       button.textContent = "In cart";
       counter++;
       total += Number(prices[i].getAttribute("data-price"));
+      console.log(Number(prices[i].getAttribute("data-id")))
+      arr.push(Number(prices[i].getAttribute("data-id")));
     } else {
       button.textContent = "Add to cart";
       counter--;
       total -= Number(prices[i].getAttribute("data-price"));
+      arr.pop();
     }
 
     cartCounter.textContent = `${counter}`;
@@ -274,4 +279,4 @@ function getCartCounterDescription(n: number) {
 const f = document.querySelector(".found-product");
 if (f != undefined) f.textContent = `Found: ${found} pcs`;
 
-export { setProductsCard, getCartCounter, getCartCounterDescription, totalCounter };
+export { setProductsCard, getCartCounter, getCartCounterDescription, totalCounter, total, arr };
