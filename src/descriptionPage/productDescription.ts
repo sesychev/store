@@ -81,7 +81,7 @@ buyNowButton.classList.add("add-to-cart__button");
 buyNowButton.textContent = "Buy Now";
 addToCart.appendChild(buyNowButton);
 
-export const imgClick = document.querySelectorAll(".product__img");
+export const imgClick = document.getElementsByClassName("product__img");
 
 function getSliderImage(n: number) {
   for (let j = 1; j < products[n].images.length; j++) {

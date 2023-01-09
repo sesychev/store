@@ -1,4 +1,3 @@
-import { emptyCart, divCartPage, cartWrapper, showInCart } from "../CartPage/cartPage";
 import { addToCartButton, divDescriptiontPage } from "../descriptionPage/productDescription";
 import { divStorePage, found } from "./filtres";
 import { products } from "../assets/data/productsData";
@@ -97,6 +96,7 @@ function setProductsCard(items: Array<Products>) {
   for (const product of items) {
     const cardProduct = document.createElement("div");
     cardProduct.classList.add("card-product");
+    cardProduct.dataset.id = product.id.toString();
     cardProduct.dataset.price = product.price.toString();
     cardProduct.dataset.rating = product.rating.toString();
     cardProduct.dataset.stock = product.stock.toString();
@@ -218,9 +218,10 @@ const totalCounter = 0;
 let total = totalCounter;
 const arr: Array<number> = [];
 
+getCartCounter();
+
 function getCartCounter() {
   const buttunToCart = document.getElementsByClassName("button-to-cart");
-
   Array.from(buttunToCart).forEach((button, i) => button.addEventListener("click", () => {
     /*
         emptyCart.style.display = "none";
@@ -234,7 +235,6 @@ function getCartCounter() {
       button.textContent = "In cart";
       counter++;
       total += Number(prices[i].getAttribute("data-price"));
-      console.log(Number(prices[i].getAttribute("data-id")))
       arr.push(Number(prices[i].getAttribute("data-id")));
     } else {
       button.textContent = "Add to cart";
@@ -248,25 +248,29 @@ function getCartCounter() {
   }))
 }
 
-getCartCounter();
-
 function getCartCounterDescription(n: number) {
+  document.querySelector("main")?.removeChild(divStorePage);
+  //document.querySelector("main")?.appendChild(cartWrapper);
+  const prices = document.getElementsByClassName("product__price");
   if (document.querySelector("main")?.appendChild(divDescriptiontPage)) {
     addToCartButton.addEventListener("click", () => {
       addToCartButton.classList.toggle("button-to-cart-active");
 
       if (addToCartButton.textContent === "Add to cart") {
         addToCartButton.textContent = "In cart";
-        counter++;
-        total += Number(products[n].price);
-      } else {
-        addToCartButton.textContent = "Add to cart";
         counter--;
         total -= Number(products[n].price);
+        arr.pop();
+      } else {
+        addToCartButton.textContent = "Add to cart";
+        counter++;
+        total += Number(products[n].price);
+        arr.push(2);
       }
 
       cartCounter.textContent = `${counter}`;
-      headerTotal.textContent = `Grand total: $ ${total}`;
+      headerTotal.textContent = `Grand total: $${total}`;
+
       //const buttunToCart = document.getElementsByClassName("button-to-cart");
       //buttunToCart[n].textContent = addToCartButton.textContent;
       //buttunToCart[n].classList.toggle("button-to-cart-active");
@@ -275,6 +279,12 @@ function getCartCounterDescription(n: number) {
   }
 }
 
+const items = document.getElementsByClassName("product__img");
+
+Array.from(items).forEach(item => item.addEventListener("click", (event) => {
+  const target = event.target as HTMLElement;
+  getCartCounterDescription(Number(target?.id))
+}))
 // getCartCounterDescription();
 const f = document.querySelector(".found-product");
 if (f != undefined) f.textContent = `Found: ${found} pcs`;

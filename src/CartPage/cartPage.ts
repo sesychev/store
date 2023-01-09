@@ -101,19 +101,14 @@ function showInCart(id: number, index: number) {
 
   const numberControl = document.createElement("div");
   numberControl.classList.add("number-control");
-  inCartItem.appendChild(numberControl);
   numberControl.textContent = "1";
+  inCartItem.appendChild(numberControl);
 
   const buttonPlus = document.createElement("button");
   buttonPlus.classList.add("button-plus", "button");
   buttonPlus.textContent = "+";
-  /*
-  buttonPlus.addEventListener("click", () => {
-
-  });
-*/
   numberControl.prepend(buttonPlus);
-  // numberControl.textContent = "1";
+
   const buttonMinus = document.createElement("button");
   buttonMinus.classList.add("button-minus", "button");
   buttonMinus.textContent = "-";

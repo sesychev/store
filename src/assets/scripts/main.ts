@@ -19,7 +19,7 @@ headerFrame.appendChild(logo);
 
 const title = document.createElement("P");
 title.setAttribute("class", "header__p");
-title.innerText = `Grand total: $ ${total}`;
+title.innerText = `Grand total: $${total}`;
 headerFrame.appendChild(title);
 
 const shopingCartFragment = document.createElement("div");
