@@ -1,9 +1,6 @@
 import "./description.css";
 import { products } from "../assets/data/productsData";
-import { divStorePage } from "../StorePage/filtres";
-import { getCartCounter, getCartCounterDescription } from "../StorePage/products";
-
-const buttunToCart = document.getElementsByClassName("button-to-cart");
+import { getCartCounterDescription } from "../StorePage/products";
 
 const fragmentDescriptiontPage = document.createDocumentFragment();
 
@@ -30,10 +27,6 @@ wrapDescriptionImage.appendChild(mainPhoto);
 export const wrapSlideImage = document.createElement("div");
 wrapSlideImage.classList.add("wrap-slide-image");
 wrapDescriptionImage.appendChild(wrapSlideImage);
-
-// const slideImage = document.createElement("img");
-// slideImage.classList.add("slide-img");
-// wrapSlideImage.appendChild(slideImage);
 
 const wrapProductInfo = document.createElement("div");
 wrapProductInfo.classList.add("wrap-description__product-info");
@@ -81,39 +74,28 @@ buyNowButton.classList.add("add-to-cart__button");
 buyNowButton.textContent = "Buy Now";
 addToCart.appendChild(buyNowButton);
 
-function getSliderImage(n: number) {
-  for (const element of products[n].images) {
+function getSliderImage(index: number) {
+  for (const element of products[index].images) {
     const slideImage = document.createElement("img");
     slideImage.classList.add("slide-img");
     slideImage.src = element;
-    wrapSlideImage.appendChild(slideImage);
+    wrapSlideImage?.appendChild(slideImage);
   }
 }
 
-export function getProductInfo(id: number) {
-  titleDescription.textContent = `${products[id].title}`;
-  mainPhoto.src = products[id].thumbnail;
-  infoDescription.textContent = `Description: ${products[id].description}`;
-  infoDiscont.textContent = `Discont: ${products[id].discountPercentage}%`;
-  infoRating.textContent = `Rating: ${products[id].rating}`;
-  infoStock.textContent = `Stock: ${products[id].stock}`;
-  infoBrand.textContent = `Brand: ${products[id].brand}`;
-  infoCategory.textContent = `Category: ${products[id].category}`;
-  priceInfo.textContent = `$${products[id].price}`;
-  addToCartButton.textContent = buttunToCart[id].textContent;
-  getSliderImage(id);
+export function getProductInfo(index: number) {
+  titleDescription.textContent = `${products[index].title}`;
+  mainPhoto.src = products[index].thumbnail;
+  infoDescription.textContent = `Description: ${products[index].description}`;
+  infoDiscont.textContent = `Discont: ${products[index].discountPercentage}%`;
+  infoRating.textContent = `Rating: ${products[index].rating}`;
+  infoStock.textContent = `Stock: ${products[index].stock}`;
+  infoBrand.textContent = `Brand: ${products[index].brand}`;
+  infoCategory.textContent = `Category: ${products[index].category}`;
+  priceInfo.textContent = `$${products[index].price}`;
 
-  if (buttunToCart[id].textContent === "In cart") {
-    addToCartButton.classList.add("button-to-cart-active");
-  }
+  getSliderImage(index);
 
-  getCartCounterDescription(id);
-  document.querySelector("main")?.removeChild(divStorePage);
+  document.querySelector("main")?.firstElementChild?.remove();
   document.querySelector("main")?.appendChild(divDescriptiontPage);
 }
-
-document.querySelector(".button-to-cart.add-to-cart__button")?.addEventListener("click", (event) => {
-  console.log(event.target);
-})
-
-// document.querySelector("main")?.appendChild(fragmentDescriptiontPage);

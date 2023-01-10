@@ -1,4 +1,4 @@
-import { addToCartButton, divDescriptiontPage, getProductInfo } from "../descriptionPage/productDescription";
+import { addToCartButton, getProductInfo } from "../descriptionPage/productDescription";
 import { divStorePage, found } from "./filtres";
 import { products } from "../assets/data/productsData";
 import { Products } from "../assets/scripts/findData";
@@ -82,7 +82,6 @@ const cardsProducts = document.createElement("div");
 cardsProducts.classList.add("cards-products");
 divProducts.appendChild(cardsProducts);
 
-// const radioSwichView = document.querySelectorAll(".switch-view");
 const cardProduct = document.getElementsByClassName("card-product");
 const productImg = document.getElementsByClassName("product__img");
 const productDescription = document.getElementsByClassName("product__description");
@@ -223,12 +222,6 @@ getCartCounter();
 function getCartCounter() {
   const buttunToCart = document.getElementsByClassName("button-to-cart");
   Array.from(buttunToCart).forEach((button, i) => button.addEventListener("click", () => {
-    /*
-        emptyCart.style.display = "none";
-        divCartPage.appendChild(cartWrapper);
-        button.classList.toggle("button-to-cart-active");
-        showInCart(i);
-    */
     const prices = document.getElementsByClassName("product__price");
 
     if (button.textContent === "Add to cart") {
@@ -248,47 +241,37 @@ function getCartCounter() {
   }))
 }
 
-function getCartCounterDescription(n: number) {
-  document.querySelector("main")?.removeChild(divStorePage);
-  //document.querySelector("main")?.appendChild(cartWrapper);
+function getCartCounterDescription(index: number) {
+  document.querySelector("main")?.firstElementChild?.remove();
 
-  if (document.querySelector("main")?.appendChild(divDescriptiontPage)) {
+  addToCartButton.addEventListener("click", () => {
 
-    addToCartButton.addEventListener("click", () => {
-      addToCartButton.classList.toggle("button-to-cart-active");
+    if (addToCartButton.textContent === "Add to cart") {
+      addToCartButton.textContent = "In cart";
+      counter++;
+      total += Number(products[index].price);
+      arr.push(Number(products[index].id));
+    } else {
+      addToCartButton.textContent = "Add to cart";
+      counter--;
+      total -= Number(products[index].price);
+      arr.pop();
+    }
 
-      if (addToCartButton.textContent === "Add to cart") {
-        addToCartButton.textContent = "In cart";
-        counter++;
-        total += Number(products[n].price);
-        arr.push(Number(products[n].id));
-      } else {
-        addToCartButton.textContent = "Add to cart";
-        counter--;
-        total -= Number(products[n].price);
-        arr.pop();
-      }
-
-      cartCounter.textContent = `${counter}`;
-      headerTotal.textContent = `Grand total: $${total}`;
-
-      //const buttunToCart = document.getElementsByClassName("button-to-cart");
-      //buttunToCart[n].textContent = addToCartButton.textContent;
-      //buttunToCart[n].classList.toggle("button-to-cart-active");
-      //return addToCartButton;
-    });
-  }
+    cartCounter.textContent = `${counter}`;
+    headerTotal.textContent = `Grand total: $${total}`;
+  });
 }
 
 const items = document.getElementsByClassName("product__img");
 
 Array.from(items).forEach(item => item.addEventListener("click", (event) => {
   const target = event.target as HTMLElement;
-  getCartCounterDescription(Number(target?.id))
-  getProductInfo(Number(target?.id));
+  getCartCounterDescription(Number(target?.id) - 1)
+  getProductInfo(Number(target?.id) - 1);
 }))
 
 const f = document.querySelector(".found-product");
 if (f != undefined) f.textContent = `Found: ${found} pcs`;
 
-export { setProductsCard, getCartCounter, getCartCounterDescription, totalCounter, total, arr };
+export { setProductsCard, getCartCounter, total, arr, counter, getCartCounterDescription };
