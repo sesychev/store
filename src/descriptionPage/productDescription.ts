@@ -73,7 +73,7 @@ addToCart.appendChild(priceInfo);
 
 export const addToCartButton = document.createElement("button");
 addToCartButton.classList.add("button-to-cart", "add-to-cart__button");
-addToCartButton.textContent = "add to cart";
+addToCartButton.textContent = "Add to cart";
 addToCart.appendChild(addToCartButton);
 
 const buyNowButton = document.createElement("button");
@@ -81,46 +81,36 @@ buyNowButton.classList.add("add-to-cart__button");
 buyNowButton.textContent = "Buy Now";
 addToCart.appendChild(buyNowButton);
 
-export const imgClick = document.getElementsByClassName("product__img");
-
 function getSliderImage(n: number) {
-  for (let j = 1; j < products[n].images.length; j++) {
+  for (const element of products[n].images) {
     const slideImage = document.createElement("img");
     slideImage.classList.add("slide-img");
-    slideImage.src = products[n].images[j];
+    slideImage.src = element;
     wrapSlideImage.appendChild(slideImage);
   }
 }
 
-function getProductInfo() {
-  for (let i = 0; i < imgClick.length; i++) {
-    imgClick[i].addEventListener("click", () => {
-      titleDescription.textContent = `${products[i].title}`;
-      mainPhoto.src = products[i].thumbnail;
-      infoDescription.textContent = `Description: ${products[i].description}`;
-      infoDiscont.textContent = `Discont: ${products[i].discountPercentage}%`;
-      infoRating.textContent = `Rating: ${products[i].rating}`;
-      infoStock.textContent = `Stock: ${products[i].stock}`;
-      infoBrand.textContent = `Brand: ${products[i].brand}`;
-      infoCategory.textContent = `Category: ${products[i].category}`;
-      priceInfo.textContent = `$${products[i].price}`;
-      addToCartButton.textContent = buttunToCart[i].textContent;
-      getSliderImage(i);
+export function getProductInfo(id: number) {
+  titleDescription.textContent = `${products[id].title}`;
+  mainPhoto.src = products[id].thumbnail;
+  infoDescription.textContent = `Description: ${products[id].description}`;
+  infoDiscont.textContent = `Discont: ${products[id].discountPercentage}%`;
+  infoRating.textContent = `Rating: ${products[id].rating}`;
+  infoStock.textContent = `Stock: ${products[id].stock}`;
+  infoBrand.textContent = `Brand: ${products[id].brand}`;
+  infoCategory.textContent = `Category: ${products[id].category}`;
+  priceInfo.textContent = `$${products[id].price}`;
+  addToCartButton.textContent = buttunToCart[id].textContent;
+  getSliderImage(id);
 
-      if (buttunToCart[i].textContent === "in cart") {
-        addToCartButton.classList.add("button-to-cart-active");
-      }
-
-      getCartCounterDescription(i);
-      document.querySelector("main")?.removeChild(divStorePage);
-      document.querySelector("main")?.appendChild(divDescriptiontPage);
-
-      return products[i];
-    });
+  if (buttunToCart[id].textContent === "In cart") {
+    addToCartButton.classList.add("button-to-cart-active");
   }
-}
 
-getProductInfo();
+  getCartCounterDescription(id);
+  document.querySelector("main")?.removeChild(divStorePage);
+  document.querySelector("main")?.appendChild(divDescriptiontPage);
+}
 
 document.querySelector(".button-to-cart.add-to-cart__button")?.addEventListener("click", (event) => {
   console.log(event.target);

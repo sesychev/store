@@ -31,7 +31,10 @@ document.querySelector(".shoping-cart")?.addEventListener("click", () => {
     document.querySelector("main")?.removeChild(divDescriptiontPage);
     document.querySelector("main")?.appendChild(cartWrapper);
     arr.forEach((item, index) => showInCart(item - 1, index));
-  } else {
+  } else if (arr.length > 0 && document.querySelector("main")?.firstChild === cartWrapper) {
+    return;
+  }
+  else {
     document.querySelector("main")?.firstElementChild?.remove();
     document.querySelector("main")?.appendChild(busketPage);
   }

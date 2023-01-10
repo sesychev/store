@@ -1,4 +1,4 @@
-import { addToCartButton, divDescriptiontPage } from "../descriptionPage/productDescription";
+import { addToCartButton, divDescriptiontPage, getProductInfo } from "../descriptionPage/productDescription";
 import { divStorePage, found } from "./filtres";
 import { products } from "../assets/data/productsData";
 import { Products } from "../assets/scripts/findData";
@@ -251,21 +251,22 @@ function getCartCounter() {
 function getCartCounterDescription(n: number) {
   document.querySelector("main")?.removeChild(divStorePage);
   //document.querySelector("main")?.appendChild(cartWrapper);
-  const prices = document.getElementsByClassName("product__price");
+
   if (document.querySelector("main")?.appendChild(divDescriptiontPage)) {
+
     addToCartButton.addEventListener("click", () => {
       addToCartButton.classList.toggle("button-to-cart-active");
 
       if (addToCartButton.textContent === "Add to cart") {
         addToCartButton.textContent = "In cart";
+        counter++;
+        total += Number(products[n].price);
+        arr.push(Number(products[n].id));
+      } else {
+        addToCartButton.textContent = "Add to cart";
         counter--;
         total -= Number(products[n].price);
         arr.pop();
-      } else {
-        addToCartButton.textContent = "Add to cart";
-        counter++;
-        total += Number(products[n].price);
-        arr.push(2);
       }
 
       cartCounter.textContent = `${counter}`;
@@ -284,8 +285,9 @@ const items = document.getElementsByClassName("product__img");
 Array.from(items).forEach(item => item.addEventListener("click", (event) => {
   const target = event.target as HTMLElement;
   getCartCounterDescription(Number(target?.id))
+  getProductInfo(Number(target?.id));
 }))
-// getCartCounterDescription();
+
 const f = document.querySelector(".found-product");
 if (f != undefined) f.textContent = `Found: ${found} pcs`;
 
